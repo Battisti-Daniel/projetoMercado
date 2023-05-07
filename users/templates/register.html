@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+  {% load static %}
+  <script src="{% static 'js/functions.js' %}" defer></script>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header>
+    <nav>
+      <div id = "top-container" class="top-container">
+        <img src="https://cdn-icons-png.flaticon.com/512/126/126083.png" alt="" id="image-register-car" class="image-register-car">
+        <a href="/register"><img src="https://cdn-icons-png.flaticon.com/512/753/753399.png" alt="" id="image-register" class="image-register"></a>
+      </div>
+    </nav>
+  </header>
+
+  <form method="post">
+    {% csrf_token %}
+
+    <table id="table-field" class="table-field">
+      {{ register.as_table }}
+    </table>
+    <input type="submit" value="Cadastrar" id="submit" class="submit">
+  </form>
+  <hr size="5px" color="#89d6d4">
+  <footer>
+    <div class="bot-container" id="bot-container">
+      <div>
+      <h2 id="table-head" class="table-head">TABELA ATUAL DE FUNCIONARIOS</h2>
+      <table>
+      <thead>
+        <th>Employed</th>
+        <th>ID</th>
+        <th>Function</th>
+      </thead>
+      <tbody>
+        {% for data in db_values %}
+          <tr> 
+            <td>
+            {{ data.name }} {{ data.last_name }}
+            </td> 
+            <td>
+              {{ data.pessoal_id }}
+            </td>
+            <td>
+              {{ data.employed_function}}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    </div>
+  </footer>
+</body>
+</html>
